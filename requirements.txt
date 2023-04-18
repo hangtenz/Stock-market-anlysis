@@ -1,0 +1,9 @@
+requests
+bs4
+pandas
+matplotlib
+python-dotenv
+xlsxwriter
+lxml
+selenium
+requests_html
