@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from tqdm import tqdm
+import os
 
 from requests_html import HTMLSession
 
@@ -11,6 +12,7 @@ from requests_html import HTMLSession
     Get all quote of SET market and save to file `STOCK_FILE_INPUT`
 """
 if __name__ == "__main__":
+    os.chdir('../')
     load_dotenv()
     url = "https://www.set.or.th/en/market/get-quote/stock/"
     session = HTMLSession()

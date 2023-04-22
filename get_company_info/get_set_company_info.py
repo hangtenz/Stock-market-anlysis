@@ -5,12 +5,14 @@ from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 from tqdm import tqdm
 import logging
+import os
 
 
 """
     Get all company information from interesting stock of file `file/SET-stocks.txt`
 """
 if __name__ == "__main__":
+    os.chdir('../')
     interesting_stock_file = open(os.getenv(""), 'r',  encoding='utf-8')
     interesting_stocks = interesting_stock_file.read().split('\n')[:-1]
     interesting_stock_file.close()
@@ -20,7 +22,7 @@ if __name__ == "__main__":
     data['Company name'] = []
     data['Company info'] = []
 
-    with pd.ExcelWriter('file/stock-output/interesting-company_info.xlsx', engine="xlsxwriter") as writer:
+    with pd.ExcelWriter('../file/stock-output/interesting-company_info.xlsx', engine="xlsxwriter") as writer:
         for stock in tqdm(interesting_stocks):
             url = f"https://www.set.or.th/th/market/product/stock/quote/{stock}/company-profile/information"
             for _ in range(3): # retry 3 times before give up

@@ -7,7 +7,6 @@ from internal.Calculate import calculate
 from internal.excelhandler.excelhandler import save_data_to_excel
 from tqdm import tqdm
 
-
 """
     Read stock list in file `STOCK_FILE_INPUT`
 """
@@ -20,9 +19,8 @@ if __name__ == "__main__":
         f.close()
 
     interesting_stock = set()
-
     # list of file to stock log of stock which cannot process
-    cannot_process_list = open('file/stock-output/cannot-process-list.txt', 'w',encoding='utf-8')
+    cannot_process_list = open('file/stock-output/cannot-process-list.txt', 'w', encoding='utf-8')
 
     # find information data
     writer = pd.ExcelWriter('file/xlsx/SET-market.xlsx', engine="xlsxwriter")
