@@ -12,6 +12,8 @@ from tqdm import tqdm
 """
 if __name__ == "__main__":
     load_dotenv()
+    market_name = os.getenv("STOCK_FILE_INPUT").split("/")[-1].split("-")[0]
+
     # read stock
     stock_list = []
     with open(os.getenv("STOCK_FILE_INPUT"), 'r', encoding='utf-8') as f:
@@ -20,10 +22,10 @@ if __name__ == "__main__":
 
     interesting_stock = set()
     # list of file to stock log of stock which cannot process
-    cannot_process_list = open('file/stock-output/cannot-process-list.txt', 'w', encoding='utf-8')
+    cannot_process_list = open(f'file/stock-output/cannot-process-{market_name}-list.txt', 'w+', encoding='utf-8')
 
     # find information data
-    writer = pd.ExcelWriter('file/xlsx/SET-market.xlsx', engine="xlsxwriter")
+    writer = pd.ExcelWriter(f'file/xlsx/{market_name}-market.xlsx', engine="xlsxwriter")
     for stock in tqdm(stock_list):
         sheet_name = stock.split(':')[1]
         try:
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     cannot_process_list.close()
 
     # write the list of interesting stock
-    with open('file/stock-output/interesting_stock.txt', 'w', encoding='utf-8') as f:
+    with open(f'file/stock-output/{market_name}-interesting_stock.txt', 'w', encoding='utf-8') as f:
         for stock in interesting_stock:
             f.write(stock + "\n")
         f.close()
