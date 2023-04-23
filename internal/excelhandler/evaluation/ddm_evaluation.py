@@ -36,5 +36,5 @@ def ddm_evaluation(ddm_data: DataFrame,writer: ExcelWriter, workbook: ExcelWrite
     if marking:
         # highlight the sheet if it's cheap stock
         if current_price <= price_to_buy:
-            interesting_stock.add(sheet_name)
+            interesting_stock.add(f"ddm:{sheet_name}")
             worksheet.set_tab_color('pink')

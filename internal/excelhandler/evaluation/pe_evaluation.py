@@ -41,5 +41,5 @@ def pe_evaluation(pe_data:DataFrame,writer: ExcelWriter, workbook: ExcelWriter, 
     if marking:
         # highlight the sheet if it's cheap stock
         if current_price <= mos30_price:
-            interesting_stock.add(sheet_name)
+            interesting_stock.add(f"pe:{sheet_name}")
             worksheet.set_tab_color('green')

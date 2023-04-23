@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 from tqdm import tqdm
-import os
 import logging
+from internal.helper import Helper
 
 from requests_html import HTMLSession
 
@@ -13,12 +13,9 @@ from requests_html import HTMLSession
 
 def get_vnd_quote():
     load_dotenv()
-    prefix_market = "vnm"
+    market = "VND"
     base_url = "https://www.investing.com/stock-screener/?sp=country::178|sector::a|industry::a|equityType::a|exchange::a%3Ceq_market_cap;"
-
     quotes = []
-
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36'}
 
     # try render page 1 by 1 till get error (page end)
     try:
@@ -38,9 +35,9 @@ def get_vnd_quote():
     except Exception:
         logging.info(f"Done of process get {len(quotes)} quotes the ending page is {page_no}")
 
-    quotes = list(set(quotes))
     # save all quote to file
-    with open(os.getenv("STOCK_FILE_INPUT"), 'w+', encoding='utf-8') as f:
-        for q in tqdm(quotes):
-            f.write(f"{prefix_market}:{q.lower()}\n")
-        f.close()
+    quotes = list(set(quotes))
+    f = Helper.get_file_stock_input(market)
+    for q in tqdm(quotes):
+        f.write(f"vnm:{q.lower()}\n")
+    f.close()

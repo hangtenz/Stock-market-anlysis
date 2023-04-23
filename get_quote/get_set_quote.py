@@ -2,13 +2,13 @@ from bs4 import BeautifulSoup
 from tqdm import tqdm
 import os
 from requests_html import HTMLSession
-
+from internal.helper import Helper
 
 """
     Get all quote of SET market and save to file `STOCK_FILE_INPUT`
 """
 def get_set_quote():
-    prefix_market = "bkk"
+    market = "SET"
     url = "https://www.set.or.th/en/market/get-quote/stock/"
     session = HTMLSession()
     resp = session.get(url)
@@ -18,7 +18,8 @@ def get_set_quote():
                       soup.find_all('li', {'class': 'tag-dropdown-item title-font-family fs-18px py-1 px-2'})))
     last_symbol = os.getenv("LAST_SET_SYMBOL")
     quotes = quotes[:quotes.index(last_symbol) + 1]
-    with open(os.getenv("STOCK_FILE_INPUT"), 'w+', encoding='utf-8') as f:
-        for q in tqdm(quotes):
-            f.write(f"{prefix_market}:{q.lower()}\n")
-        f.close()
+
+    f = Helper.get_file_stock_input(market, mode='w')
+    for q in tqdm(quotes):
+        f.write(f"bkk:{q.lower()}\n")
+    f.close()
