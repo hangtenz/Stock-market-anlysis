@@ -21,7 +21,7 @@ def pe_evaluation(pe_data:DataFrame,writer: ExcelWriter, workbook: ExcelWriter, 
     assert len(pe) >= 5, assert_msg
 
     pe_sum = sum(pe) - max(pe) - min(pe)
-    avg_pe = pe_sum / len(pe) - 2
+    avg_pe = pe_sum / (len(pe) - 2)
     fair_price = expected_earning * avg_pe
     mos30_price = 0.7 * fair_price
     current_price = pe_data.loc['ราคา', current_year]
