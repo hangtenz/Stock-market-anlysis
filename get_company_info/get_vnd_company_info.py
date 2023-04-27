@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup
 from requests_html import HTMLSession
 from tqdm import tqdm
 import logging
-import os
-from dotenv import load_dotenv
 from internal.helper import Helper
 
 """

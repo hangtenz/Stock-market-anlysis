@@ -349,7 +349,6 @@ vnm:dvm
 vnm:dtc
 vnm:cad
 vnm:dxs
-vnm:nlg
 vnm:hmg
 vnm:srb
 vnm:cmf
